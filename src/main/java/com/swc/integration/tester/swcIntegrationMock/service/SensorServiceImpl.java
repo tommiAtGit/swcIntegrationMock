@@ -1,4 +1,4 @@
-package com.swc.integration.tester.swcIntegrationMock.controller.service;
+package com.swc.integration.tester.swcIntegrationMock.service;
 
 import org.springframework.stereotype.Service;
 

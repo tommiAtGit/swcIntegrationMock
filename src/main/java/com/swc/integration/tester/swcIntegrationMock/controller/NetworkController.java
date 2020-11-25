@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.swc.integration.tester.swcIntegrationMock.controller.service.NetworkService;
 import com.swc.integration.tester.swcIntegrationMock.model.Network;
 import com.swc.integration.tester.swcIntegrationMock.model.web.NetworkDto;
+import com.swc.integration.tester.swcIntegrationMock.service.NetworkService;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
