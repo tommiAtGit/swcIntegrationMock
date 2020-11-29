@@ -1,5 +1,7 @@
 package com.swc.integration.tester.swcIntegrationMock.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.swc.integration.tester.swcIntegrationMock.model.Station;
@@ -12,14 +14,23 @@ import lombok.extern.slf4j.Slf4j;
 public class StationServiceImpl implements StationService {
 
 	@Override
-	public Station saveStation(StationDto stationDto) {
+	public Station saveStation(List<StationDto> stationDtos) {
 		
-		log.info("...Station received with following parameters: " +  stationDto.getUuid() + " " + stationDto.getName() );
-		return Station.builder()
+		
+		Station station = null;
+		for (StationDto stationDto : stationDtos) {
+			
+			log.info("...Station received with following parameters: " +  stationDto.getUuid() + " Name " + stationDto.getName()  + " Network " + stationDto.getNetwork());
+			
+			station = Station.builder()
 				.uuid(stationDto.getUuid())
 				.name(stationDto.getName())
 				.description(stationDto.getDescription())
 				.build();
+		}
+		
+		
+		return station;
 	}
 
 }

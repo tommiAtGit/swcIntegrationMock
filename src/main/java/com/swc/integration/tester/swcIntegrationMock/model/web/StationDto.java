@@ -1,5 +1,10 @@
 package com.swc.integration.tester.swcIntegrationMock.model.web;
 
+import java.util.List;
+
+import com.swc.integration.tester.swcIntegrationMock.model.StationChildren;
+import com.swc.integration.tester.swcIntegrationMock.model.StationSettings;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,7 +17,19 @@ import lombok.Setter;
 @Setter
 @Builder
 public class StationDto {
-	String uuid;
-	String name;
-	String description;
+	private String uuid;
+	  
+	private String  network;
+ 
+	private String name;
+
+	private String description;
+
+	private StationSettings settings;
+
+	private String code;  
+ 
+	private List<String>tags;
+  
+	private StationChildren children;
 }

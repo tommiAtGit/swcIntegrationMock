@@ -1,9 +1,12 @@
 package com.swc.integration.tester.swcIntegrationMock.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RequiredArgsConstructor
-@RequestMapping("/network/{networkID}/sensors")
+@RequestMapping("/networks/{networkID}/sensors")
 @RestController
 public class SensorController {
 
@@ -28,9 +31,17 @@ public class SensorController {
 	
 	
 	@PostMapping
-	public ResponseEntity<Sensor>saveNetwork( @Validated @RequestBody SensorDto sensorDto){
-		log.info(".. New sensor added with name: " + sensorDto.getName());
-		return new ResponseEntity<Sensor>(service.saveSensor(sensorDto),HttpStatus.CREATED);
+	public ResponseEntity<Sensor>saveSensors( @Validated @PathVariable("networkID") String networkId, @Validated @RequestBody List<SensorDto> sensorDtos){
+		
+		if (networkId == null) {
+			log.error("..at saveSensors, network id were null");
+		}
+		else {
+			log.info("..at saveSensors, network id OK! " + networkId );
+		}
+		
+		log.info(".. New sensors added. Number of sensors created: " + sensorDtos.size());
+		return new ResponseEntity<Sensor>(service.saveSensor(sensorDtos),HttpStatus.CREATED);
 	
 	}
 }

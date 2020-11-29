@@ -1,5 +1,7 @@
 package com.swc.integration.tester.swcIntegrationMock.model.web;
 
+import com.swc.integration.tester.swcIntegrationMock.model.NetworkChildren;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,7 +14,13 @@ import lombok.Setter;
 @Setter
 @Builder
 public class NetworkDto {
-	String uuid;
-	String name;
-	String description;
+
+	private String uuid;
+
+    private String name;
+    
+    private String description;
+
+    private  NetworkChildren children;
+
 }

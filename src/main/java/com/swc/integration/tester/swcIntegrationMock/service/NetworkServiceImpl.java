@@ -14,7 +14,8 @@ public class NetworkServiceImpl implements NetworkService {
 	@Override
 	public Network saveNetwork(NetworkDto networkDto) {
 		
-		log.info("..Network received with following parameters: " + networkDto.getUuid() + " " +networkDto.getName() );
+		log.info("..Network received with following parameters: " + networkDto.getUuid() + " " + networkDto.getName() );
+	
 		return Network.builder()
 				.uuid(networkDto.getUuid())
 				.name(networkDto.getName())

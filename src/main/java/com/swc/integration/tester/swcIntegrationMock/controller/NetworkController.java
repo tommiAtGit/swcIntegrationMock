@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RequiredArgsConstructor
-@RequestMapping("/network")
+@RequestMapping("/networks")
 @RestController
 public class NetworkController {
 
@@ -28,7 +28,7 @@ public class NetworkController {
 		
 		@PostMapping
 		public ResponseEntity<Network>saveNetwork( @Validated @RequestBody NetworkDto networkDto){
-			log.info("New Network added with name: " + networkDto.getName());
+			log.info("New Network added with uuid: " +networkDto.getUuid() + " and name: " + networkDto.getName());
 			return new ResponseEntity<Network>(service.saveNetwork(networkDto),HttpStatus.CREATED);
 		
 		}
