@@ -1,10 +1,10 @@
 package com.swc.integration.tester.swcIntegrationMock.model;
 
-import java.util.List;
-import java.util.UUID;
+
+
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,24 +13,19 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-@Builder
+
 public class Sensor {
 
-private UUID  uuid;
+	private String  uuid;
     
-	private List<String>  ext_id;
+	private String  ext_id;
    	
-	private String name;
+	private String sensor_id;
     
 	private SensorTypeEnum sensor_type;
     
 	private Point position;
     
-	private UUID parent;
+	private String parent;
 	
-	private double offset_error;
-	
-	private double vertical_position;
-	
-	private String reverse;
 }

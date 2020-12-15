@@ -7,18 +7,20 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Builder
+@SuperBuilder
 
 
-public class Battery {
+
+public class Battery extends Link{
 	
 
-	private Link link;
+	//private Link link;
         
 	private String battery_type;
               

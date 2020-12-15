@@ -21,7 +21,7 @@ public class SensorDto {
 
 	private UUID  uuid;
     
-	private List<String>  ext_id;
+	private String  ext_id;
    	
 	private String name;
     
@@ -29,7 +29,7 @@ public class SensorDto {
     
 	private Point position;
     
-	private UUID parent;
+	private String parent;
 	
 	private double offset_error;
 	

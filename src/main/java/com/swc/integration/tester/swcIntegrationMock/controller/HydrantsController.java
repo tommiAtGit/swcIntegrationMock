@@ -1,5 +1,7 @@
 package com.swc.integration.tester.swcIntegrationMock.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,8 +29,8 @@ public class HydrantsController {
 	
 	@PostMapping
 	public ResponseEntity<Hydrant>saveNetwork(@Validated @PathVariable("networkID") String networkId,
-												@Validated @RequestBody HydrantDto HydrantkDto){
-		log.info("New Network added with uuid: " +HydrantkDto.getNode().getUuid() + " and name: " + HydrantkDto.getNode().getUuid());
+												@Validated @RequestBody List<HydrantDto> HydrantkDto){
+		log.info("New hydrants added: " + HydrantkDto.size() + " with network id: " + networkId );
 		return new ResponseEntity<Hydrant>(service.saveHydrant(HydrantkDto),HttpStatus.CREATED);
 	
 	}

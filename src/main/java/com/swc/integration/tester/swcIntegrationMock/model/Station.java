@@ -24,7 +24,7 @@ public class Station {
 
 	private StationSettings settings;
 
-	private String code;  
+	//private String code;  
  
 	private List<String>tags;
   

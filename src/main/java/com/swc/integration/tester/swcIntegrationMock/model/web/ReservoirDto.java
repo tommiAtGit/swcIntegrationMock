@@ -17,7 +17,7 @@ import lombok.Setter;
 @Builder
 public class ReservoirDto {
 
-	private Node  node;
+	//private Node  node;
 	
 	private String station;
 	

@@ -1,5 +1,7 @@
 package com.swc.integration.tester.swcIntegrationMock.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,8 +28,9 @@ public class GateValveController {
 	
 	@PostMapping
 	public ResponseEntity<GateValve>saveNetwork(@Validated @PathVariable("networkID") String networkId,
-												@Validated @RequestBody GateValveDto gatevalvekDto){
-		log.info("New Network added with uuid: " +gatevalvekDto.getUuid() + " and name: " + gatevalvekDto.getName());
+												@Validated @RequestBody List<GateValveDto> gatevalvekDto){
+		
+		log.info("New Gateevalves added");
 		return new ResponseEntity<GateValve>(service.saveGateValve(gatevalvekDto),HttpStatus.CREATED);
 	
 	}

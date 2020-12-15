@@ -8,15 +8,17 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Builder
-public class PipeDto {
+@SuperBuilder
 
-	private Link link;
+public class PipeDto extends Link {
+
+	//private Link link;
 	
 	private double lenth;
 		            

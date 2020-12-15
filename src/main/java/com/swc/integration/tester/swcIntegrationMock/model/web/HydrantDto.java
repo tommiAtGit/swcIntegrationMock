@@ -15,7 +15,7 @@ import lombok.Setter;
 @Builder
 public class HydrantDto {
 
-	private Node node;
+	//private Node node;
 	
 	private double open_time;
 	     	

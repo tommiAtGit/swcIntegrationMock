@@ -9,15 +9,16 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Builder
-public class Valve {
+@SuperBuilder
+public class Valve extends Link {
 
-	private Link link;
+	//private Link link;
 	
 	private String station;
 	

@@ -7,15 +7,16 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Builder
-public class Tank {
+@SuperBuilder
+public class Tank extends Node {
 
-	private Node node;
+	//private Node node;
 	
 	private String station;
 	 

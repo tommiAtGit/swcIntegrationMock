@@ -7,15 +7,16 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Builder
-public class Pump {
+@SuperBuilder
+public class Pump extends Link{
 
-	private Link link;
+	//private Link link;
 	
 	private String station;
     
