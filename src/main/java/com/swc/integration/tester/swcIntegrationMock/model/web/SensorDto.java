@@ -20,6 +20,8 @@ import lombok.Setter;
 public class SensorDto {
 
 	private UUID  uuid;
+	
+	private String sensor_id;
     
 	private String  ext_id;
    	

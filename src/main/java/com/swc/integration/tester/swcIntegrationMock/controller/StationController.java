@@ -38,7 +38,7 @@ public class StationController {
 			log.info("..at saveStations, network id OK! " + networkId );
 		}
 		
-		log.info("New stations added. Number of stations created:: " + stationDtos.size());
+		log.info("New STATIONS added. Number of stations created:: " + stationDtos.size());
 		return new ResponseEntity<Station>(service.saveStation(stationDtos),HttpStatus.CREATED);
 	
 	}

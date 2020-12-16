@@ -17,7 +17,7 @@ import lombok.experimental.SuperBuilder;
 public class Pipe extends Link{
 
 	
-	private double lenth;
+	private double length;
 		            
 	private double diameter;
 		              
@@ -31,7 +31,6 @@ public class Pipe extends Link{
 		              
 	private Integer year;
 		              
-	private Boolean zone_limit;
 		             
 	private List<String> zones;
 		             

@@ -3,7 +3,6 @@ package com.swc.integration.tester.swcIntegrationMock.model;
 
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,7 +23,7 @@ public class Node {
        	
 	  	private double quality;
        	
-       	private NodeSource source;
+       //	private NodeSource source;
               
         private Point coordinates;
         

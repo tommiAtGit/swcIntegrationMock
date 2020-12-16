@@ -31,13 +31,13 @@ public class PipeController {
 	public ResponseEntity<Pipe>savePipes( @Validated @PathVariable("networkID") String networkId, @Validated @RequestBody List<PipeDto> pioeDtos){
 		
 		if (networkId == null) {
-			log.error("..at savePioes, network id were null");
+			log.error("..at savePipes, network id were null");
 		}
 		else {
-			log.info("..at saveSensors, network id OK! " + networkId );
+			log.info("..at savePipes, network id OK! " + networkId );
 		}
 		
-		log.info(".. New sensors added. Number of sensors created: " + pioeDtos.size());
+		log.info(".. New PIPES added. Number of sensors created: " + pioeDtos.size());
 		return new ResponseEntity<Pipe>(service.savePipe(pioeDtos),HttpStatus.CREATED);
 	
 	}

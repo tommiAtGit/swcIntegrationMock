@@ -1,21 +1,23 @@
 package com.swc.integration.tester.swcIntegrationMock.model.web;
 
+
+
 import com.swc.integration.tester.swcIntegrationMock.model.Node;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Builder
-public class HydrantDto {
+@SuperBuilder
 
-	//private Node node;
+public class HydrantDto extends Node {
+
 	
 	private double open_time;
 	     	
@@ -26,4 +28,5 @@ public class HydrantDto {
 	private double min_pressure;
 	 
 	private double diameter;
+              
 }

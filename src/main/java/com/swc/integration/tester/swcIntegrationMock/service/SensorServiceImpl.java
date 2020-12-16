@@ -37,7 +37,7 @@ public class SensorServiceImpl implements SensorService{
 				FlowSensor flowSensor = FlowSensor.builder()
 				.id(sensorDto.getUuid().toString())
 				.ext_id(sensorDto.getExt_id())
-				.sensor_id(sensorDto.getName())
+				.sensor_id(sensorDto.getSensor_id())
 				.sensor_type(sensorDto.getSensor_type())
 				.position(sensorDto.getPosition())
 				.parent(sensorDto.getParent())
@@ -48,7 +48,7 @@ public class SensorServiceImpl implements SensorService{
 				WaterLevelSenor waterLevelSenor = WaterLevelSenor.builder()
 				.id(sensorDto.getUuid().toString())
 				.ext_id(sensorDto.getExt_id())
-				.sensor_id(sensorDto.getName())
+				.sensor_id(sensorDto.getSensor_id())
 				.sensor_type(sensorDto.getSensor_type())
 				.position(sensorDto.getPosition())
 				.parent(sensorDto.getParent())
@@ -60,7 +60,7 @@ public class SensorServiceImpl implements SensorService{
 				PressureSensor pressureSensor = PressureSensor.builder()
 				.id(sensorDto.getUuid().toString())
 				.ext_id(sensorDto.getExt_id())
-				.sensor_id(sensorDto.getName())
+				.sensor_id(sensorDto.getSensor_id())
 				.sensor_type(sensorDto.getSensor_type())
 				.position(sensorDto.getPosition())
 				.parent(sensorDto.getParent())
@@ -77,7 +77,7 @@ public class SensorServiceImpl implements SensorService{
 		String objectAsJson;
 		try {
 			objectAsJson = mapper.writeValueAsString(sensors);
-			log.info("..at createStations, object as Json:  " + objectAsJson); 
+			log.info("..at saveSensors, object as Json:  " + objectAsJson); 
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
 			log.error("Error occured while parsing json: ");

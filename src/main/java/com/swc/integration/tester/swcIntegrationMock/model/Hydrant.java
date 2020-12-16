@@ -3,21 +3,21 @@ package com.swc.integration.tester.swcIntegrationMock.model;
 
 
 
+
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Builder
+@SuperBuilder
 
-public class Hydrant {
+public class Hydrant extends Node {
 
-	private Node node;
 	
 	private double open_time;
 	     	

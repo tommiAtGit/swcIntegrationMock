@@ -40,7 +40,7 @@ public class ReservoirController {
 			log.info("..at saveReservoir, network id OK! " + networkId );
 		}
 		
-		log.info(".. New reservoir added. Number of reservoirs created: " + reservoirDtos.size());
+		log.info(".. New RESERVOIR added. Number of reservoirs created: " + reservoirDtos.size());
 		return new ResponseEntity<Reservoir>(service.saveReservoir(reservoirDtos),HttpStatus.CREATED);
 	
 	}

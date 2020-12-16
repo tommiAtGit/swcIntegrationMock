@@ -12,6 +12,7 @@
 /Users/tommi.korteikkocinia.fi/projects/ALVA/MocPackEnd/swcIntegrationMock/src/main/java/com/swc/integration/tester/swcIntegrationMock/model/GateValve.java
 /Users/tommi.korteikkocinia.fi/projects/ALVA/MocPackEnd/swcIntegrationMock/src/main/java/com/swc/integration/tester/swcIntegrationMock/model/web/GateValveDto.java
 /Users/tommi.korteikkocinia.fi/projects/ALVA/MocPackEnd/swcIntegrationMock/src/main/java/com/swc/integration/tester/swcIntegrationMock/model/web/StationDto.java
+/Users/tommi.korteikkocinia.fi/projects/ALVA/MocPackEnd/swcIntegrationMock/src/main/java/com/swc/integration/tester/swcIntegrationMock/model/FlowSensor.java
 /Users/tommi.korteikkocinia.fi/projects/ALVA/MocPackEnd/swcIntegrationMock/src/main/java/com/swc/integration/tester/swcIntegrationMock/service/GatevalveServiceImpl.java
 /Users/tommi.korteikkocinia.fi/projects/ALVA/MocPackEnd/swcIntegrationMock/src/main/java/com/swc/integration/tester/swcIntegrationMock/model/Area.java
 /Users/tommi.korteikkocinia.fi/projects/ALVA/MocPackEnd/swcIntegrationMock/src/main/java/com/swc/integration/tester/swcIntegrationMock/model/Settings.java
@@ -20,6 +21,7 @@
 /Users/tommi.korteikkocinia.fi/projects/ALVA/MocPackEnd/swcIntegrationMock/src/main/java/com/swc/integration/tester/swcIntegrationMock/model/Network.java
 /Users/tommi.korteikkocinia.fi/projects/ALVA/MocPackEnd/swcIntegrationMock/src/main/java/com/swc/integration/tester/swcIntegrationMock/model/NetworkChildren.java
 /Users/tommi.korteikkocinia.fi/projects/ALVA/MocPackEnd/swcIntegrationMock/src/main/java/com/swc/integration/tester/swcIntegrationMock/model/Hydrant.java
+/Users/tommi.korteikkocinia.fi/projects/ALVA/MocPackEnd/swcIntegrationMock/src/main/java/com/swc/integration/tester/swcIntegrationMock/model/WaterLevelSenor.java
 /Users/tommi.korteikkocinia.fi/projects/ALVA/MocPackEnd/swcIntegrationMock/src/main/java/com/swc/integration/tester/swcIntegrationMock/model/Reservoir.java
 /Users/tommi.korteikkocinia.fi/projects/ALVA/MocPackEnd/swcIntegrationMock/src/main/java/com/swc/integration/tester/swcIntegrationMock/model/Demand.java
 /Users/tommi.korteikkocinia.fi/projects/ALVA/MocPackEnd/swcIntegrationMock/src/main/java/com/swc/integration/tester/swcIntegrationMock/service/HydrantServiceImpl.java
@@ -59,4 +61,5 @@
 /Users/tommi.korteikkocinia.fi/projects/ALVA/MocPackEnd/swcIntegrationMock/src/main/java/com/swc/integration/tester/swcIntegrationMock/model/Sensor.java
 /Users/tommi.korteikkocinia.fi/projects/ALVA/MocPackEnd/swcIntegrationMock/src/main/java/com/swc/integration/tester/swcIntegrationMock/model/web/SensorDto.java
 /Users/tommi.korteikkocinia.fi/projects/ALVA/MocPackEnd/swcIntegrationMock/src/main/java/com/swc/integration/tester/swcIntegrationMock/model/Vertices.java
+/Users/tommi.korteikkocinia.fi/projects/ALVA/MocPackEnd/swcIntegrationMock/src/main/java/com/swc/integration/tester/swcIntegrationMock/model/PressureSensor.java
 /Users/tommi.korteikkocinia.fi/projects/ALVA/MocPackEnd/swcIntegrationMock/src/main/java/com/swc/integration/tester/swcIntegrationMock/model/StationChildren.java

@@ -35,7 +35,7 @@ public abstract class Link {
     
 	private LinkStatusEnum status;
 	
-	private String setting;
+	//private double setting;
 	
 	private ExtraFields extra_fields;
 	

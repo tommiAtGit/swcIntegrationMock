@@ -12,34 +12,33 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.swc.integration.tester.swcIntegrationMock.model.Hydrant;
-import com.swc.integration.tester.swcIntegrationMock.model.web.HydrantDto;
-import com.swc.integration.tester.swcIntegrationMock.service.HydrantService;
-
+import com.swc.integration.tester.swcIntegrationMock.model.Junction;
+import com.swc.integration.tester.swcIntegrationMock.model.web.JunctionDto;
+import com.swc.integration.tester.swcIntegrationMock.service.JunctionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RequiredArgsConstructor
-@RequestMapping("/networks/{networkID}/hydrants")
+@RequestMapping("/networks/{networkID}/junctions")
 @RestController
-public class HydrantsController {
+public class JunctionController {
+
 	@Autowired
-	HydrantService service;
+	JunctionService service;
 	
 	@PostMapping
-	public ResponseEntity<Hydrant>saveHydrant(@Validated @PathVariable("networkID") String networkId,
-												@Validated @RequestBody List<HydrantDto> HydrantkDto){
+	public ResponseEntity<Junction>saveJunctions( @Validated @PathVariable("networkID") String networkId, @Validated @RequestBody List<JunctionDto> junctionsDto){
 		
 		if (networkId == null) {
-			log.error("..at saveHydrant, network id were null");
+			log.error("..at saveJunctions, network id were null");
 		}
 		else {
-			log.info("..at saveHydrant, network id OK! " + networkId );
+			log.info("..at saveJunctions, network id OK! " + networkId );
 		}
 		
-		log.info("New HYDRANTS added: " + HydrantkDto.size() + " with network id: " + networkId );
-		return new ResponseEntity<Hydrant>(service.saveHydrant(HydrantkDto),HttpStatus.CREATED);
+		log.info(".. New JUNCTIONS added. Number of junctions created: " + junctionsDto.size());
+		return new ResponseEntity<Junction>(service.saveJunction(junctionsDto),HttpStatus.CREATED);
 	
 	}
 }

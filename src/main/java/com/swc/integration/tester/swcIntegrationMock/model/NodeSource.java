@@ -1,8 +1,5 @@
 package com.swc.integration.tester.swcIntegrationMock.model;
 
-import java.util.UUID;
-
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

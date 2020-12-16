@@ -47,7 +47,7 @@ public class StationServiceImpl implements StationService {
 		String objectAsJson;
 		try {
 			objectAsJson = mapper.writeValueAsString(stations);
-			log.info("..at createStations, object as Json:  " + objectAsJson); 
+			log.info("..at saveStations, object as Json:  " + objectAsJson); 
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
 			log.error("Error occured while parsing json: ");

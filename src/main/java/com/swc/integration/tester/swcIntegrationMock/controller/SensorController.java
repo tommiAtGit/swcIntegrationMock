@@ -40,7 +40,7 @@ public class SensorController {
 			log.info("..at saveSensors, network id OK! " + networkId );
 		}
 		
-		log.info(".. New sensors added. Number of sensors created: " + sensorDtos.size());
+		log.info(".. New SENSORS added. Number of sensors created: " + sensorDtos.size());
 		return new ResponseEntity<Sensor>(service.saveSensor(sensorDtos),HttpStatus.CREATED);
 	
 	}

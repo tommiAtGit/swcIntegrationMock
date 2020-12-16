@@ -31,16 +31,20 @@ public class PipeServiceImpl implements PipeService{
 					.uuid(pipeDto.getUuid())
 					.name(pipeDto.getName())
 					.start(pipeDto.getStart())
+					.end(pipeDto.getEnd())
 					.vertices(pipeDto.getVertices())
 					.leakage_coeff1(pipeDto.getLeakage_coeff1())
 					.leakage_coeff2(pipeDto.getLeakage_coeff2())
-					.setting(pipeDto.getSetting())
 					.status(pipeDto.getStatus())
 					.extra_fields(pipeDto.getExtra_fields())
 					.custom_length(pipeDto.getCustom_length())
 					.diameter(pipeDto.getDiameter())
-					.lenth(pipeDto.getLenth())
+					.length(pipeDto.getLength())
 					.material(pipeDto.getMaterial())
+					.year(pipeDto.getYear())
+					.zones(pipeDto.getZones())
+					.tags(pipeDto.getTags())
+					.ext_ids(pipeDto.getExt_ids())
 					.build();
 			if (index < SAMPLE_SIZE) {
 				pipes.add(pipe);
@@ -51,7 +55,7 @@ public class PipeServiceImpl implements PipeService{
 		String objectAsJson;
 		try {
 			objectAsJson = mapper.writeValueAsString(pipes);
-			log.info("..at createStations, object as Json:  " + objectAsJson); 
+			log.info("..at savePipes, object as Json:  " + objectAsJson); 
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
 			log.error("Error occured while parsing json: ");

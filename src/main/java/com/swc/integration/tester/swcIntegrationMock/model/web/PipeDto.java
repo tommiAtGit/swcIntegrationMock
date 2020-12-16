@@ -3,8 +3,8 @@ package com.swc.integration.tester.swcIntegrationMock.model.web;
 import java.util.List;
 
 import com.swc.integration.tester.swcIntegrationMock.model.Link;
+
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,7 +20,7 @@ public class PipeDto extends Link {
 
 	//private Link link;
 	
-	private double lenth;
+	private double length;
 		            
 	private double diameter;
 		              
@@ -34,7 +34,7 @@ public class PipeDto extends Link {
 		              
 	private Integer year;
 		              
-	private Boolean zone_limit;
+	//private Boolean zone_limit;
 		             
 	private List<String> zones;
 		             
