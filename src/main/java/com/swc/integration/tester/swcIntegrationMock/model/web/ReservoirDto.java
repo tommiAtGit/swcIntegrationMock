@@ -5,19 +5,18 @@ import java.util.List;
 import com.swc.integration.tester.swcIntegrationMock.model.Node;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Builder
-public class ReservoirDto {
+@SuperBuilder
+public class ReservoirDto extends Node{
 
-	//private Node  node;
 	
 	private String station;
 	

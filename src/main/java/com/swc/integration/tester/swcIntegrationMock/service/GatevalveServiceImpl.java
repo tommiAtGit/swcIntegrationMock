@@ -1,9 +1,17 @@
 package com.swc.integration.tester.swcIntegrationMock.service;
 
+import java.net.URI;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,12 +26,20 @@ public class GatevalveServiceImpl implements GatevalveService {
 
 	private ObjectMapper mapper = new ObjectMapper();
 	private static int SAMPLE_SIZE = 3;
+	private static RestTemplate restTemplate;
+	@Value("${swc.network.url}")
+	private String networUrl;
+	 
+	@Value("${swc.network.token}")
+	private String networkApiToken; 
+	
 	
 	@Override
-	public GateValve saveGateValve(List<GateValveDto>  gatevalveDtos) {
+	public GateValve saveGateValve(String networkId, List<GateValveDto>  gatevalveDtos) {
 		
 		GateValve gateValve = null;
 		List<GateValve> gateValves = new ArrayList<GateValve>();
+		List<GateValve> allGateValves = new ArrayList<GateValve>();
 		int index = 0;
 		
 		for (GateValveDto gatevalveDto : gatevalveDtos) {
@@ -41,18 +57,25 @@ public class GatevalveServiceImpl implements GatevalveService {
 					.ext_ids(gatevalveDto.getExt_ids())
 					.tags(gatevalveDto.getTags())
 					.zones(gatevalveDto.getZones())
-			
 					.build();
+			
 			if (index <SAMPLE_SIZE) {
 				gateValves.add(gateValve);
 				index++;
 			}
+			allGateValves.add(gateValve);
 		}
 		// Print out sample of pipes as json
 		String objectAsJson;
 		try {
 			objectAsJson = mapper.writeValueAsString(gateValves);
-			log.info("..at createStations, object as Json:  " + objectAsJson); 
+			log.info("..at saveGateValve , object as Json:  " + objectAsJson); 
+			
+			log.info(" ");
+			log.info("+ Send GateValves + ");
+			createGateValves(networkId,gateValves);
+			log.info("End of GateValve send ");
+			
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
 			log.error("Error occured while parsing json: ");
@@ -63,6 +86,64 @@ public class GatevalveServiceImpl implements GatevalveService {
 		// TODO Auto-generated method stub
 		return gateValve;
 		
+	}
+//Send test gateValves
+	private  ResponseEntity<String> createGateValves (String network,List<GateValve> gateValves) {
+		final String serviceUrl = "/networks/" + network +  "/gatevalves";
+		final String baseUrl = networUrl+serviceUrl;
+		
+		int postIndex = 0; 
+		int stepSize = 100;
+		
+		log.info("++ Start of GateValve post: " + LocalDateTime.now() + "++");    
+		if ((gateValves == null)|| (gateValves.size() < 1))  {
+			log.error("..at createGateValves, no gatevalves aviable:  ");  
+			return null;
+		}
+		URI uri = null;
+	    
+		ResponseEntity<String> result = null;
+		
+	    try {
+	    	log.info(".. At createGateValves, baseurl:  " + baseUrl);  
+	    	
+			
+			uri = new URI(baseUrl);
+		
+			restTemplate = new RestTemplate();
+			for (GateValve gateValve : gateValves) {
+				postIndex++;
+				HttpEntity<GateValve> request = new HttpEntity<>(gateValve, defineHeaders());
+				result = restTemplate.postForEntity(uri, request, String.class); 
+				if (postIndex % stepSize == 0) {
+					log.info("GateValve: " + postIndex + " send with result: " + result.getStatusCode());  
+				}
+				
+			}
+			
+		
+	    } catch (Exception e) {
+	    	log.error("..at createGateValves, Error occured:  "); 
+			e.printStackTrace();
+			return null;
+		}
+		
+		log.info("End of GateValve post: " + LocalDateTime.now());        
+		
+		return result;
+		
+	}
+	
+	private HttpHeaders  defineHeaders() {
+		
+		String token = networkApiToken;
+		
+		HttpHeaders headers = new HttpHeaders();
+	    headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.setBearerAuth(token);
+		headers.set("Accept", "application/vnd.alva.swc.network+json;v=1");
+	    return headers;
+	    
 	}
 
 }

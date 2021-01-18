@@ -1,7 +1,5 @@
 package com.swc.integration.tester.swcIntegrationMock.model.web;
 
-import com.swc.integration.tester.swcIntegrationMock.model.NetworkChildren;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,6 +19,6 @@ public class NetworkDto {
     
     private String description;
 
-    private  NetworkChildren children;
+   // private  NetworkChildren children;
 
 }

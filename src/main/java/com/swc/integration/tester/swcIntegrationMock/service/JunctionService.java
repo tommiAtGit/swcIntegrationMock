@@ -7,5 +7,5 @@ import com.swc.integration.tester.swcIntegrationMock.model.web.JunctionDto;
 
 public interface JunctionService {
 
-	Junction saveJunction(List<JunctionDto> junctions);
+	Junction saveJunction(List<JunctionDto> junctions, String networkId);
 }

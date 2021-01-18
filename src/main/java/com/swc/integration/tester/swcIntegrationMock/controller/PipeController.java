@@ -28,7 +28,7 @@ public class PipeController {
 	PipeService service;
 	
 	@PostMapping
-	public ResponseEntity<Pipe>savePipes( @Validated @PathVariable("networkID") String networkId, @Validated @RequestBody List<PipeDto> pioeDtos){
+	public ResponseEntity<Pipe>savePipes( @Validated @PathVariable("networkID") String networkId, @Validated @RequestBody List<PipeDto> pipeDtos){
 		
 		if (networkId == null) {
 			log.error("..at savePipes, network id were null");
@@ -37,8 +37,8 @@ public class PipeController {
 			log.info("..at savePipes, network id OK! " + networkId );
 		}
 		
-		log.info(".. New PIPES added. Number of sensors created: " + pioeDtos.size());
-		return new ResponseEntity<Pipe>(service.savePipe(pioeDtos),HttpStatus.CREATED);
+		log.info(".. New PIPES added. Number of pipes created: " + pipeDtos.size());
+		return new ResponseEntity<Pipe>(service.savePipe(networkId,pipeDtos),HttpStatus.CREATED);
 	
 	}
 }

@@ -1,9 +1,17 @@
 package com.swc.integration.tester.swcIntegrationMock.service;
 
+import java.net.URI;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,12 +26,22 @@ public class PipeServiceImpl implements PipeService{
 
 	private ObjectMapper mapper = new ObjectMapper();
 	private static int SAMPLE_SIZE = 3;
+	private static RestTemplate restTemplate;
+	
+	@Value("${swc.network.url}")
+	private String networUrl;
+	 
+	@Value("${swc.network.token}")
+	private String networkApiToken; 
 	
 	@Override
-	public Pipe savePipe(List<PipeDto> pipeDtos) {
+	public Pipe savePipe(String networkId, List<PipeDto> pipeDtos) {
 		
 		Pipe pipe = null;
 		List<Pipe> pipes = new ArrayList<Pipe>();
+		List<Pipe> allPipes = new ArrayList<Pipe>();
+		
+		
 		int index = 0;
 		
 		for (PipeDto pipeDto : pipeDtos) {
@@ -40,7 +58,7 @@ public class PipeServiceImpl implements PipeService{
 					.custom_length(pipeDto.getCustom_length())
 					.diameter(pipeDto.getDiameter())
 					.length(pipeDto.getLength())
-					.material(pipeDto.getMaterial())
+					//.material(pipeDto.getMaterial())
 					.year(pipeDto.getYear())
 					.zones(pipeDto.getZones())
 					.tags(pipeDto.getTags())
@@ -50,6 +68,7 @@ public class PipeServiceImpl implements PipeService{
 				pipes.add(pipe);
 				index++;
 			}
+			allPipes.add(pipe);
 		}
 		// Print out sample of pipes as json
 		String objectAsJson;
@@ -62,9 +81,88 @@ public class PipeServiceImpl implements PipeService{
 			e.printStackTrace();
 		}
 		
+		String objectJson;
+		try {
+			if (pipes.size()> 0) {
+				objectJson = mapper.writeValueAsString(pipes);
+				log.info("..at savePipes, pipes with sensors:  " + objectJson); 
+				
+				log.info(" ");
+				log.info("+ Send Pipes + ");
+				createTestPipes(networkId,allPipes);
+				log.info("End of pipes with sensors ");
+				
+			}
+			
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			log.error("Error occured while parsing json: ");
+			e.printStackTrace();
+		}
 		
 		// TODO Auto-generated method stub
 		return pipe;
 	}
+	
+	//Send test pipes
+		private  ResponseEntity<String> createTestPipes (String network,List<Pipe> pipes) {
+			
+			final String serviceUrl = "/networks/" + network +  "/pipes";
+			final String baseUrl = networUrl+serviceUrl;
+			int index = 0;
+			int stepSize = 100;
+			
+			log.info("++ Start of Pipe post: ++ " + LocalDateTime.now()); 
+			if ((pipes == null)|| (pipes.size() < 1))  {
+				log.error("..at createTestPipes, no pipes aviable:  ");  
+				return null;
+			}
+			URI uri = null;
+		    
+			ResponseEntity<String> result = null;
+			
+		    try {
+		    	log.info(".. At createTestPipes, baseurl:  " + baseUrl);  
+		    	
+				
+				uri = new URI(baseUrl);
+			
+				restTemplate = new RestTemplate();
+				for (Pipe pipe : pipes) {
+					index++;
+					HttpEntity<Pipe> request = new HttpEntity<>(pipe, defineHeaders());
+					
+					result = restTemplate.postForEntity(uri, request, String.class);
+					if (index % stepSize == 0) {
+						log.info("Pipe: " + index + " send with result: " + result.getStatusCode());	
+					}
+					  
+				}
+				
+			
+		    } catch (Exception e) {
+		    	log.error("..at createTestPipes, Error occured:  "); 
+				e.printStackTrace();
+				return null;
+			}
+			
+			log.info("Junctions posted with response: " + result.getStatusCode());        
+			
+			return result;
+			
+		}
+		
+		private HttpHeaders  defineHeaders() {
+			
+			String token = networkApiToken;
+			
+			HttpHeaders headers = new HttpHeaders();
+		    headers.setContentType(MediaType.APPLICATION_JSON);
+			headers.setBearerAuth(token);
+			headers.set("Accept", "application/vnd.alva.swc.network+json;v=1");
+		    return headers;
+		    
+		}
+	
 
 }

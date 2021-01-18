@@ -2,8 +2,8 @@ package com.swc.integration.tester.swcIntegrationMock.model.web;
 
 import java.util.List;
 
-import com.swc.integration.tester.swcIntegrationMock.model.Demand;
 import com.swc.integration.tester.swcIntegrationMock.model.Node;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

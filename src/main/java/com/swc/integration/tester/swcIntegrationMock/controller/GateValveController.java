@@ -27,11 +27,20 @@ public class GateValveController {
 	GatevalveService service;
 	
 	@PostMapping
-	public ResponseEntity<GateValve>saveNetwork(@Validated @PathVariable("networkID") String networkId,
+	public ResponseEntity<GateValve>saveGateValves(@Validated @PathVariable("networkID") String networkId,
 												@Validated @RequestBody List<GateValveDto> gatevalvekDto){
 		
-		log.info("New Gateevalves added");
-		return new ResponseEntity<GateValve>(service.saveGateValve(gatevalvekDto),HttpStatus.CREATED);
+		if (networkId == null) {
+			log.error("..at saveGateValves, network id were null");
+		}
+		else {
+			log.info("..at saveGateValves, network id OK! " + networkId );
+		}
+		
+		log.info(".. New GATEVALVES added. Number of gate valves created: " + gatevalvekDto.size());
+		
+		
+		return new ResponseEntity<GateValve>(service.saveGateValve(networkId, gatevalvekDto),HttpStatus.CREATED);
 	
 	}
 }

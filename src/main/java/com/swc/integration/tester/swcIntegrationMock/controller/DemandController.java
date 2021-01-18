@@ -12,36 +12,35 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.swc.integration.tester.swcIntegrationMock.model.Sensor;
-import com.swc.integration.tester.swcIntegrationMock.model.web.SensorDto;
-import com.swc.integration.tester.swcIntegrationMock.service.SensorService;
-
+import com.swc.integration.tester.swcIntegrationMock.model.Demand;
+import com.swc.integration.tester.swcIntegrationMock.model.web.DemandDto;
+import com.swc.integration.tester.swcIntegrationMock.service.DemandService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RequiredArgsConstructor
-@RequestMapping("/networks/{networkID}/sensors")
+@RequestMapping("/networks/{networkID}/demands")
 @RestController
-public class SensorController {
-
+public class DemandController {
 	@Autowired
-	SensorService service;
-	
-	
+	DemandService service;
 	
 	@PostMapping
-	public ResponseEntity<Sensor>saveSensors( @Validated @PathVariable("networkID") String networkId, @Validated @RequestBody List<SensorDto> sensorDtos){
+	public ResponseEntity<Demand> saveDemands(@Validated @PathVariable("networkID") String networkId,
+												@Validated @RequestBody List<DemandDto> demandDtos){
 		
 		if (networkId == null) {
-			log.error("..at saveSensors, network id were null");
+			log.error("..at saveDemands, network id were null");
 		}
 		else {
-			log.info("..at saveSensors, network id OK! " + networkId );
+			log.info("..at saveDemands, network id OK! " + networkId );
 		}
 		
-		log.info(".. New SENSORS added. Number of sensors created: " + sensorDtos.size());
-		return new ResponseEntity<Sensor>(service.saveSensor(networkId,sensorDtos),HttpStatus.CREATED);
+		log.info(".. New DEMANDS added. Number of demands created: " + demandDtos.size());
+		
+		
+		return new ResponseEntity<Demand>(service.saveDemand(demandDtos),HttpStatus.CREATED);
 	
-	}
+	}	
 }

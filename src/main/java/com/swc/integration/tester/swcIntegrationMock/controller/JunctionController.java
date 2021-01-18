@@ -38,7 +38,7 @@ public class JunctionController {
 		}
 		
 		log.info(".. New JUNCTIONS added. Number of junctions created: " + junctionsDto.size());
-		return new ResponseEntity<Junction>(service.saveJunction(junctionsDto),HttpStatus.CREATED);
+		return new ResponseEntity<Junction>(service.saveJunction(junctionsDto, networkId),HttpStatus.CREATED);
 	
 	}
 }

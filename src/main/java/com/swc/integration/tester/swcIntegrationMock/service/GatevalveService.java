@@ -6,5 +6,5 @@ import com.swc.integration.tester.swcIntegrationMock.model.GateValve;
 import com.swc.integration.tester.swcIntegrationMock.model.web.GateValveDto;
 
 public interface GatevalveService {
-	public GateValve saveGateValve(List<GateValveDto> gatevalveDtos);
+	public GateValve saveGateValve(String networkId, List<GateValveDto> gatevalveDtos);
 }

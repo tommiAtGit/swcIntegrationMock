@@ -1,6 +1,5 @@
 package com.swc.integration.tester.swcIntegrationMock.model.web;
 
-import java.util.List;
 import java.util.UUID;
 
 import com.swc.integration.tester.swcIntegrationMock.model.Point;

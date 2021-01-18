@@ -7,5 +7,5 @@ import com.swc.integration.tester.swcIntegrationMock.model.web.HydrantDto;
 
 public interface HydrantService {
 
-	public Hydrant saveHydrant(List<HydrantDto> hydrantDto);
+	public Hydrant saveHydrant(String network, List<HydrantDto> hydrantDto);
 }

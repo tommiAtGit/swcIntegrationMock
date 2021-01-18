@@ -7,5 +7,5 @@ import com.swc.integration.tester.swcIntegrationMock.model.web.PipeDto;
 
 public interface PipeService {
 
-	public Pipe savePipe(List<PipeDto> pipeDto);
+	public Pipe savePipe(String networkId, List<PipeDto> pipeDto);
 }

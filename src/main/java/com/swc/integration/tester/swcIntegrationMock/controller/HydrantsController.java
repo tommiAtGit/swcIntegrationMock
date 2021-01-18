@@ -35,11 +35,11 @@ public class HydrantsController {
 			log.error("..at saveHydrant, network id were null");
 		}
 		else {
-			log.info("..at saveHydrant, network id OK! " + networkId );
+			log.info("..at saveHydrant, network  id OK! " + networkId );
 		}
 		
 		log.info("New HYDRANTS added: " + HydrantkDto.size() + " with network id: " + networkId );
-		return new ResponseEntity<Hydrant>(service.saveHydrant(HydrantkDto),HttpStatus.CREATED);
+		return new ResponseEntity<Hydrant>(service.saveHydrant(networkId,HydrantkDto),HttpStatus.CREATED);
 	
 	}
 }

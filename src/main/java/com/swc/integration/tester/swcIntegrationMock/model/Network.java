@@ -21,5 +21,5 @@ public class Network {
     
     private String description;
 
-    private  NetworkChildren children;
+   // private  NetworkChildren children;
 }

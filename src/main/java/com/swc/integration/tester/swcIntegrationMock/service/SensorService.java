@@ -7,5 +7,5 @@ import com.swc.integration.tester.swcIntegrationMock.model.web.SensorDto;
 
 public interface SensorService {
 
-	public Sensor saveSensor(List<SensorDto> sensorkDto);
+	public Sensor saveSensor(String networkId, List<SensorDto> sensorkDto);
 }
