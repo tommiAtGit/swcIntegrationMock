@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,4 +44,23 @@ public class GateValveController {
 		return new ResponseEntity<GateValve>(service.saveGateValve(networkId, gatevalvekDto),HttpStatus.CREATED);
 	
 	}
+	
+	@PutMapping("/{gatevalveId}")
+	public ResponseEntity<GateValve> updateGaveValve(@Validated @PathVariable("networkID") String networkId,
+													 @Validated @PathVariable("gatevalveId") String gatevalveId,
+													 @Validated @RequestBody GateValveDto gatevalvekDto){
+		
+		if ((networkId == null) || (gatevalveId == null)) {
+			log.error("..at updateGaveValve, network id or gatevalve id were null");
+		}
+		else 
+		{
+			log.info("..at updateGaveValve, network id OK! " + networkId + " gatevalve id OK! " + gatevalveId );
+		}
+		
+		return null;
+		
+	}
+	
+	
 }

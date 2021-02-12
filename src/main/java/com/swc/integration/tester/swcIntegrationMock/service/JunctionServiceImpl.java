@@ -32,6 +32,9 @@ public class JunctionServiceImpl implements JunctionService {
 	@Value("${swc.network.token}")
 	private String networkApiToken; 
 	
+	@Value("${swc.network.sendflag}")
+	private String sendFlag;
+	
 	@Override
 	public Junction saveJunction(List<JunctionDto> junctionDtos,String network) {
 		Junction junction = null;
@@ -68,46 +71,18 @@ public class JunctionServiceImpl implements JunctionService {
 					
 		}
 		
-		String objectAsJson;
-		try {
-			objectAsJson = mapper.writeValueAsString(junctions);
-			log.info("..at saveJunctions, object as Json:  " + objectAsJson); 
-		} catch (JsonProcessingException e) {
-			log.error("Error occured while parsing json: ");
-			e.printStackTrace();
-		}
-		
 		log.info("");
-		log.info("Junctions for sensors");
-		for (Junction aJunction : allJunctions) {
-			if ((aJunction.getName().contains("2949126")) ||
-					(aJunction.getName().contains("2949127")) ||
-					(aJunction.getName().contains("2949128")) ||
-					(aJunction.getName().contains("2949123")) ||
-					(aJunction.getName().contains("2949122")) ||
-					(aJunction.getName().contains("2949121")) ||
-					(aJunction.getName().contains("2949141")) ||
-					(aJunction.getName().contains("2929057")) ||
-					(aJunction.getName().contains("2929055")) ||
-					(aJunction.getName().contains("2929054")) ||
-					(aJunction.getName().contains("2949120")) ||
-					(aJunction.getName().contains("2846311")) ) {
-				printJunctions.add(aJunction);
-			}
-		}
-		
-		log.info("Junctions for sensors size: " + printJunctions.size());
 		String junctionObjectAsJson;
 		try {
-			if (printJunctions.size() > 0) {
+			if (allJunctions.size() > 0) {
 				junctionObjectAsJson = mapper.writeValueAsString(printJunctions);
-				log.info("..at saveJunctions: Sensor junction object as Json:  " + junctionObjectAsJson); 
-				log.info(" "); 
-				
-				createJunctions(network,allJunctions);
+				log.info("..at saveJunctions:"); 
+				if (sendFlag.equals("TRUE")) {
+					log.info(" "); 
+					log.info("+ Send Junctions + ");
+					createJunctions(network,allJunctions);
+				}
 			}
-			
-			log.info("--- Emd of junctions with sensors ---");
 			
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
@@ -148,7 +123,7 @@ public class JunctionServiceImpl implements JunctionService {
 				HttpEntity<Junction> request = new HttpEntity<>(junction, defineHeaders());
 				result = restTemplate.postForEntity(uri, request, String.class); 
 				if (postIndex % stepSize == 0) {
-					log.info("Pipe: " + postIndex + " send with result: " + result.getStatusCode());  
+					log.info("Junction: " + postIndex + " send with result: " + result.getStatusCode());  
 				}
 				
 			}

@@ -3,6 +3,7 @@ package com.swc.integration.tester.swcIntegrationMock.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -16,6 +17,9 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class StationServiceImpl implements StationService {
 
+	@Value("${swc.network.sendflag}")
+	private String sendFlag;
+	
 	private ObjectMapper mapper = new ObjectMapper();
 	private static int SAMPLE_SIZE = 3;
 	@Override

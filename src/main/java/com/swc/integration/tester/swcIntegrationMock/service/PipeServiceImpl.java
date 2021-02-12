@@ -34,6 +34,10 @@ public class PipeServiceImpl implements PipeService{
 	@Value("${swc.network.token}")
 	private String networkApiToken; 
 	
+	@Value("${swc.network.sendflag}")
+	private String sendFlag;
+	
+	
 	@Override
 	public Pipe savePipe(String networkId, List<PipeDto> pipeDtos) {
 		
@@ -58,7 +62,7 @@ public class PipeServiceImpl implements PipeService{
 					.custom_length(pipeDto.getCustom_length())
 					.diameter(pipeDto.getDiameter())
 					.length(pipeDto.getLength())
-					//.material(pipeDto.getMaterial())
+					.material(pipeDto.getMaterial())
 					.year(pipeDto.getYear())
 					.zones(pipeDto.getZones())
 					.tags(pipeDto.getTags())
@@ -76,7 +80,6 @@ public class PipeServiceImpl implements PipeService{
 			objectAsJson = mapper.writeValueAsString(pipes);
 			log.info("..at savePipes, object as Json:  " + objectAsJson); 
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
 			log.error("Error occured while parsing json: ");
 			e.printStackTrace();
 		}
@@ -85,22 +88,20 @@ public class PipeServiceImpl implements PipeService{
 		try {
 			if (pipes.size()> 0) {
 				objectJson = mapper.writeValueAsString(pipes);
-				log.info("..at savePipes, pipes with sensors:  " + objectJson); 
-				
-				log.info(" ");
-				log.info("+ Send Pipes + ");
-				createTestPipes(networkId,allPipes);
-				log.info("End of pipes with sensors ");
-				
+				log.info("..at savePipes, pipe snapshot:  " + objectJson); 
+				if (sendFlag.equals("TRUE")) {
+					log.info(" ");
+					log.info("+ Send Pipes + ");
+					createTestPipes(networkId,allPipes);
+					log.info("End of pipes with sensors ");
+				}
 			}
 			
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
 			log.error("Error occured while parsing json: ");
 			e.printStackTrace();
 		}
 		
-		// TODO Auto-generated method stub
 		return pipe;
 	}
 	

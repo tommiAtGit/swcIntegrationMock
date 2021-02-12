@@ -33,6 +33,9 @@ public class HydrantServiceImpl implements HydrantService {
 	@Value("${swc.network.token}")
 	private String networkApiToken; 
 	
+	@Value("${swc.network.sendflag}")
+	private String sendFlag;
+	
 	@Override
 	public Hydrant saveHydrant(String network, List<HydrantDto> hydrantDto) {
 		
@@ -68,9 +71,11 @@ public class HydrantServiceImpl implements HydrantService {
 		try {
 			objectAsJson = mapper.writeValueAsString(sampleHydrants);
 			log.info("..at saveHydrant, object as Json:  " + objectAsJson); 
-			log.info(" "); 
-			log.info(" + Post hydrants + "); 
-			createHydrants(network,hydrants);
+			if(sendFlag.equals("TRUE")) {
+				log.info(" "); 
+				log.info(" + Post hydrants + "); 
+				createHydrants(network,hydrants);
+			}
 			
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
@@ -86,7 +91,7 @@ public class HydrantServiceImpl implements HydrantService {
 			final String baseUrl = networUrl+serviceUrl;
 			
 			int postIndex = 0; 
-			int stepSize = 100;
+			int stepSize = 10;
 			
 			log.info("++ Start of Hydrant post: " + LocalDateTime.now() + "++");    
 			if ((hydrants == null)|| (hydrants.size() < 1))  {

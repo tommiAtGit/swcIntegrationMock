@@ -25,7 +25,7 @@ public class Pipe extends Link{
 		            
 	private double minor_loss;
 		            
-	//private String  material;
+	private String  material;
 		            
 	private double custom_length;
 		              
