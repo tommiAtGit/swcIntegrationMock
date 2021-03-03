@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class ReserviorServiceImpl implements ReservoirService{
+public class ReserviorServiceImpl implements ReservoirService {
 
 	@Override
 	public Reservoir saveReservoir(List<ReservoirDto> reservoirDto) {

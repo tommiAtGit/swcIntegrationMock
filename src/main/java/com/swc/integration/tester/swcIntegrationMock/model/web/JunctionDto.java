@@ -15,26 +15,26 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 @SuperBuilder
-public class JunctionDto extends Node{
+public class JunctionDto extends Node {
 
 	private double elevation;
-	
+
 	private double demand;
-	
-	//private String demand_pattern;
-	
-	//private List<Demand>demands;
-	
+
+	// private String demand_pattern;
+
+	// private List<Demand>demands;
+
 	private double emitter_coeff;
-             
-    private boolean ignore_for_geocoded;
-             
-    private double required_head;
-              
-    private String symbol;
-              
-    private List<String> zone;
-            
-    private List<String> tags;
-              
+
+	private boolean ignore_for_geocoded;
+
+	private double required_head;
+
+	private String symbol;
+
+	private List<String> zone;
+
+	private List<String> tags;
+
 }

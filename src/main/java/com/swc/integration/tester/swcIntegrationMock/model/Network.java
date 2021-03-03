@@ -1,7 +1,5 @@
 package com.swc.integration.tester.swcIntegrationMock.model;
 
-
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,11 +13,11 @@ import lombok.Setter;
 @Builder
 public class Network {
 
-    private String uuid;
+	private String uuid;
 
-    private String name;
-    
-    private String description;
+	private String name;
 
-   // private  NetworkChildren children;
+	private String description;
+
+	// private NetworkChildren children;
 }

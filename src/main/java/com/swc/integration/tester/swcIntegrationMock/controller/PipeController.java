@@ -23,22 +23,22 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/networks/{networkID}/pipes")
 @RestController
 public class PipeController {
-	
+
 	@Autowired
 	PipeService service;
-	
+
 	@PostMapping
-	public ResponseEntity<Pipe>savePipes( @Validated @PathVariable("networkID") String networkId, @Validated @RequestBody List<PipeDto> pipeDtos){
-		
+	public ResponseEntity<Pipe> savePipes(@Validated @PathVariable("networkID") String networkId,
+			@Validated @RequestBody List<PipeDto> pipeDtos) {
+
 		if (networkId == null) {
 			log.error("..at savePipes, network id were null");
+		} else {
+			log.info("..at savePipes, network id OK! " + networkId);
 		}
-		else {
-			log.info("..at savePipes, network id OK! " + networkId );
-		}
-		
+
 		log.info(".. New PIPES added. Number of pipes created: " + pipeDtos.size());
-		return new ResponseEntity<Pipe>(service.savePipe(networkId,pipeDtos),HttpStatus.CREATED);
-	
+		return new ResponseEntity<Pipe>(service.savePipe(networkId, pipeDtos), HttpStatus.CREATED);
+
 	}
 }

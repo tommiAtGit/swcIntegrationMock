@@ -1,7 +1,5 @@
 package com.swc.integration.tester.swcIntegrationMock.model;
 
-
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,16 +13,16 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class Node {
 
-	  	private String uuid;
-    
-	  	private String name;
-	  	
-        private String description;
-       	
-	  	private double quality;
-       	
-       //	private NodeSource source;
-              
-        private Point coordinates;
-        
+	private String uuid;
+
+	private String name;
+
+	private String description;
+
+	private double quality;
+
+	// private NodeSource source;
+
+	private Point coordinates;
+
 }

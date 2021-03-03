@@ -14,28 +14,26 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @SuperBuilder
 
-public class Pipe extends Link{
+public class Pipe extends Link {
 
-	
 	private double length;
-		            
+
 	private double diameter;
-		              
+
 	private double roughness;
-		            
+
 	private double minor_loss;
-		            
-	private String  material;
-		            
+
+	private String material;
+
 	private double custom_length;
-		              
+
 	private Integer year;
-		              
-		             
+
 	private List<String> zones;
-		             
+
 	private List<String> tags;
-		           
+
 	private List<String> ext_ids;
-	             
+
 }

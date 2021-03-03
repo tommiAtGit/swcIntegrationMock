@@ -26,19 +26,19 @@ public class JunctionController {
 
 	@Autowired
 	JunctionService service;
-	
+
 	@PostMapping
-	public ResponseEntity<Junction>saveJunctions( @Validated @PathVariable("networkID") String networkId, @Validated @RequestBody List<JunctionDto> junctionsDto){
-		
+	public ResponseEntity<Junction> saveJunctions(@Validated @PathVariable("networkID") String networkId,
+			@Validated @RequestBody List<JunctionDto> junctionsDto) {
+
 		if (networkId == null) {
 			log.error("..at saveJunctions, network id were null");
+		} else {
+			log.info("..at saveJunctions, network id OK! " + networkId);
 		}
-		else {
-			log.info("..at saveJunctions, network id OK! " + networkId );
-		}
-		
+
 		log.info(".. New JUNCTIONS added. Number of junctions created: " + junctionsDto.size());
-		return new ResponseEntity<Junction>(service.saveJunction(junctionsDto, networkId),HttpStatus.CREATED);
-	
+		return new ResponseEntity<Junction>(service.saveJunction(junctionsDto, networkId), HttpStatus.CREATED);
+
 	}
 }

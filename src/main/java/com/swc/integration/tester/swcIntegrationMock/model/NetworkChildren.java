@@ -15,21 +15,20 @@ import lombok.Setter;
 @Builder
 public class NetworkChildren {
 
-
 	private List<Station> station;
-   
-	private List<Pipe>  pipes;
 
-	private List<GateValve>gatevalves;
-	   
-	private  List<Area> areas;
+	private List<Pipe> pipes;
 
-	private List <Junction> junctions;
+	private List<GateValve> gatevalves;
+
+	private List<Area> areas;
+
+	private List<Junction> junctions;
 
 	private List<Hydrant> hydrants;
 
-	private List<Sensor>  sensors;
- 
-	private List<Demand>  demands;
- 
+	private List<Sensor> sensors;
+
+	private List<Demand> demands;
+
 }

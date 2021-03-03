@@ -2,7 +2,6 @@ package com.swc.integration.tester.swcIntegrationMock.model;
 
 import java.util.List;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,6 +17,6 @@ import lombok.Setter;
 @Builder
 
 public class Settings {
-	private  String key;
-	private List<SettingValues>values;
+	private String key;
+	private List<SettingValues> values;
 }

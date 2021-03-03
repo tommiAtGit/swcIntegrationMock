@@ -22,14 +22,13 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 public class NetworkController {
 
+	@Autowired
+	NetworkService service;
 
-		@Autowired
-		NetworkService service;
-		
-		@PostMapping
-		public ResponseEntity<Network>saveNetwork( @Validated @RequestBody NetworkDto networkDto){
-			log.info("New Network added with uuid: " +networkDto.getUuid() + " and name: " + networkDto.getName());
-			return new ResponseEntity<Network>(service.saveNetwork(networkDto),HttpStatus.CREATED);
-		
-		}
+	@PostMapping
+	public ResponseEntity<Network> saveNetwork(@Validated @RequestBody NetworkDto networkDto) {
+		log.info("New Network added with uuid: " + networkDto.getUuid() + " and name: " + networkDto.getName());
+		return new ResponseEntity<Network>(service.saveNetwork(networkDto), HttpStatus.CREATED);
+
+	}
 }

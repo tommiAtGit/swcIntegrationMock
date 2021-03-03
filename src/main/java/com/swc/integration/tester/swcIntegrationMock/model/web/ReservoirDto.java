@@ -15,16 +15,15 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 @SuperBuilder
-public class ReservoirDto extends Node{
+public class ReservoirDto extends Node {
 
-	
 	private String station;
-	
+
 	private double head;
-           
-    private String head_pattern;
-    
-    private String symbol;
-   
-    private List<String> tags;
+
+	private String head_pattern;
+
+	private String symbol;
+
+	private List<String> tags;
 }

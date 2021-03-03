@@ -18,18 +18,18 @@ import lombok.Setter;
 @Builder
 public class StationDto {
 	private String uuid;
-	  
-	private String  network;
- 
+
+	private String network;
+
 	private String name;
 
 	private String description;
 
 	private StationSettings settings;
 
-	private String code;  
- 
-	private List<String>tags;
-  
+	private String code;
+
+	private List<String> tags;
+
 	private StationChildren children;
 }

@@ -26,41 +26,37 @@ import lombok.extern.slf4j.Slf4j;
 public class GateValveController {
 	@Autowired
 	GatevalveService service;
-	
+
 	@PostMapping
-	public ResponseEntity<GateValve>saveGateValves(@Validated @PathVariable("networkID") String networkId,
-												@Validated @RequestBody List<GateValveDto> gatevalvekDto){
-		
+	public ResponseEntity<GateValve> saveGateValves(@Validated @PathVariable("networkID") String networkId,
+			@Validated @RequestBody List<GateValveDto> gatevalvekDto) {
+
 		if (networkId == null) {
 			log.error("..at saveGateValves, network id were null");
+		} else {
+			log.info("..at saveGateValves, network id OK! " + networkId);
 		}
-		else {
-			log.info("..at saveGateValves, network id OK! " + networkId );
-		}
-		
+
 		log.info(".. New GATEVALVES added. Number of gate valves created: " + gatevalvekDto.size());
-		
-		
-		return new ResponseEntity<GateValve>(service.saveGateValve(networkId, gatevalvekDto),HttpStatus.CREATED);
-	
+
+		return new ResponseEntity<GateValve>(service.saveGateValve(networkId, gatevalvekDto), HttpStatus.CREATED);
+
 	}
-	
+
 	@PutMapping("/{gatevalveId}")
 	public ResponseEntity<GateValve> updateGaveValve(@Validated @PathVariable("networkID") String networkId,
-													 @Validated @PathVariable("gatevalveId") String gatevalveId,
-													 @Validated @RequestBody GateValveDto gatevalvekDto){
-		
+			@Validated @PathVariable("gatevalveId") String gatevalveId,
+			@Validated @RequestBody GateValveDto gatevalveDto) {
+
 		if ((networkId == null) || (gatevalveId == null)) {
 			log.error("..at updateGaveValve, network id or gatevalve id were null");
+		} else {
+			log.info("..at updateGaveValve, network id OK! " + networkId + " gatevalve id OK! " + gatevalveId);
 		}
-		else 
-		{
-			log.info("..at updateGaveValve, network id OK! " + networkId + " gatevalve id OK! " + gatevalveId );
-		}
-		
-		return null;
-		
+
+		return new ResponseEntity<GateValve>(service.updateGateValve(networkId, gatevalveId, gatevalveDto),
+				HttpStatus.CREATED);
+
 	}
-	
-	
+
 }

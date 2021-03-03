@@ -26,20 +26,19 @@ import lombok.extern.slf4j.Slf4j;
 public class HydrantsController {
 	@Autowired
 	HydrantService service;
-	
+
 	@PostMapping
-	public ResponseEntity<Hydrant>saveHydrant(@Validated @PathVariable("networkID") String networkId,
-												@Validated @RequestBody List<HydrantDto> HydrantkDto){
-		
+	public ResponseEntity<Hydrant> saveHydrant(@Validated @PathVariable("networkID") String networkId,
+			@Validated @RequestBody List<HydrantDto> HydrantkDto) {
+
 		if (networkId == null) {
 			log.error("..at saveHydrant, network id were null");
+		} else {
+			log.info("..at saveHydrant, network  id OK! " + networkId);
 		}
-		else {
-			log.info("..at saveHydrant, network  id OK! " + networkId );
-		}
-		
-		log.info("New HYDRANTS added: " + HydrantkDto.size() + " with network id: " + networkId );
-		return new ResponseEntity<Hydrant>(service.saveHydrant(networkId,HydrantkDto),HttpStatus.CREATED);
-	
+
+		log.info("New HYDRANTS added: " + HydrantkDto.size() + " with network id: " + networkId);
+		return new ResponseEntity<Hydrant>(service.saveHydrant(networkId, HydrantkDto), HttpStatus.CREATED);
+
 	}
 }

@@ -27,22 +27,21 @@ public class ReservoirController {
 
 	@Autowired
 	ReservoirService service;
-	
+
 	@PostMapping
-	public ResponseEntity<Reservoir>saveReservoir( @Validated @PathVariable("networkID") String networkId,
+	public ResponseEntity<Reservoir> saveReservoir(@Validated @PathVariable("networkID") String networkId,
 			@Validated @PathVariable("stationId") String stationId,
-			@Validated @RequestBody List<ReservoirDto> reservoirDtos){
-		
+			@Validated @RequestBody List<ReservoirDto> reservoirDtos) {
+
 		if (networkId == null) {
 			log.error("..at saveReservoir, network id were null");
+		} else {
+			log.info("..at saveReservoir, network id OK! " + networkId);
 		}
-		else {
-			log.info("..at saveReservoir, network id OK! " + networkId );
-		}
-		
+
 		log.info(".. New RESERVOIR added. Number of reservoirs created: " + reservoirDtos.size());
-		return new ResponseEntity<Reservoir>(service.saveReservoir(reservoirDtos),HttpStatus.CREATED);
-	
+		return new ResponseEntity<Reservoir>(service.saveReservoir(reservoirDtos), HttpStatus.CREATED);
+
 	}
-	
+
 }

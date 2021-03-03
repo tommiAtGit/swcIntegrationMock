@@ -16,22 +16,22 @@ import lombok.Setter;
 public class GateValveDto {
 
 	private String uuid;
-	  
+
 	private String network;
-  
+
 	private String name;
-  
+
 	private double change_time;
-  
+
 	private double change_back_time;
-      
+
 	private Boolean closed;
- 
-	private double lat; // min: -90.0, max: 90 
+
+	private double lat; // min: -90.0, max: 90
 
 	private double lon; // minn: -180, 180
 
-	private double alt;  
+	private double alt;
 
 	private List<String> ext_ids;
 

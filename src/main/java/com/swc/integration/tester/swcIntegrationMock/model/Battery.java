@@ -14,29 +14,26 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @SuperBuilder
 
+public class Battery extends Link {
 
+	// private Link link;
 
-public class Battery extends Link{
-	
-
-	//private Link link;
-        
 	private String battery_type;
-              
+
 	private String algorithm;
-              
+
 	private Integer max_concurrent_pumps;
-     
+
 	private double flow_step;
-     
-	private  double head_step;
-	
+
+	private double head_step;
+
 	private List<String> ext_ids;
-      
+
 	private List<String> tags;
-      
+
 	private List<String> zones;
-      
+
 	private List<String> pumps;
-            
+
 }

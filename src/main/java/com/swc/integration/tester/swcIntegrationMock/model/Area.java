@@ -1,6 +1,5 @@
 package com.swc.integration.tester.swcIntegrationMock.model;
 
-
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -18,11 +17,11 @@ import lombok.Setter;
 public class Area {
 
 	private String uuid;
-	         
-	private  String network;
-	          
-	private List <String> ext_id;
-	          
+
+	private String network;
+
+	private List<String> ext_id;
+
 	private String name;
-	          
+
 }

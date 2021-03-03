@@ -28,129 +28,121 @@ public class JunctionServiceImpl implements JunctionService {
 	private static RestTemplate restTemplate;
 	@Value("${swc.network.url}")
 	private String networUrl;
-	 
+
 	@Value("${swc.network.token}")
-	private String networkApiToken; 
-	
+	private String networkApiToken;
+
 	@Value("${swc.network.sendflag}")
 	private String sendFlag;
-	
+
 	@Override
-	public Junction saveJunction(List<JunctionDto> junctionDtos,String network) {
+	public Junction saveJunction(List<JunctionDto> junctionDtos, String network) {
 		Junction junction = null;
 		List<Junction> junctions = new ArrayList<Junction>();
 		List<Junction> allJunctions = new ArrayList<Junction>();
 		List<Junction> printJunctions = new ArrayList<Junction>();
 		int index = 0;
-		
+
 		for (JunctionDto junctionDto : junctionDtos) {
-			junction = Junction.builder()
-					.uuid(junctionDto.getUuid())
-					.name(junctionDto.getName())
-					.description(junctionDto.getDescription())
-					.quality(junctionDto.getQuality())
-					//.source(junctionDto.getSource())
-					.coordinates(junctionDto.getCoordinates())
-					.elevation(junctionDto.getElevation())
-					//.demand(junctionDto.getDemand())
-					//.demand_pattern(junctionDto.getDemand_pattern())
+			junction = Junction.builder().uuid(junctionDto.getUuid()).name(junctionDto.getName())
+					.description(junctionDto.getDescription()).quality(junctionDto.getQuality())
+					// .source(junctionDto.getSource())
+					.coordinates(junctionDto.getCoordinates()).elevation(junctionDto.getElevation())
+					// .demand(junctionDto.getDemand())
+					// .demand_pattern(junctionDto.getDemand_pattern())
 					.emitter_coeff(junctionDto.getEmitter_coeff())
 					.ignore_for_geocoded(junctionDto.isIgnore_for_geocoded())
-					.required_head(junctionDto.getRequired_head())
-					.symbol(junctionDto.getSymbol())
-					.zone(junctionDto.getZone())
-					.tags(junctionDto.getTags())
-					
+					.required_head(junctionDto.getRequired_head()).symbol(junctionDto.getSymbol())
+					.zone(junctionDto.getZone()).tags(junctionDto.getTags())
+
 					.build();
-			
+
 			if (index < SAMPLE_SIZE) {
 				junctions.add(junction);
 				index++;
 			}
 			allJunctions.add(junction);
-					
+
 		}
-		
+
 		log.info("");
 		String junctionObjectAsJson;
 		try {
 			if (allJunctions.size() > 0) {
 				junctionObjectAsJson = mapper.writeValueAsString(printJunctions);
-				log.info("..at saveJunctions:"); 
+				log.info("..at saveJunctions:");
 				if (sendFlag.equals("TRUE")) {
-					log.info(" "); 
+					log.info(" ");
 					log.info("+ Send Junctions + ");
-					createJunctions(network,allJunctions);
+					createJunctions(network, allJunctions);
 				}
 			}
-			
+
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
 			log.error("Error occured while parsing json: ");
 			e.printStackTrace();
 		}
 		log.info("");
-		
+
 		return junction;
 	}
-	
-	//Send test junctions
-	private  ResponseEntity<String> createJunctions (String network,List<Junction> junctions) {
-		
-		final String serviceUrl = "/networks/" + network +  "/junctions";
-		final String baseUrl = networUrl+serviceUrl;
-		
-		int postIndex = 0; 
+
+	// Send test junctions
+	private ResponseEntity<String> createJunctions(String network, List<Junction> junctions) {
+
+		final String serviceUrl = "/networks/" + network + "/junctions";
+		final String baseUrl = networUrl + serviceUrl;
+
+		int postIndex = 0;
 		int stepSize = 100;
-		
-		if ((junctions == null)|| (junctions.size() < 1))  {
-			log.error("..at createJunctions, no junctions aviable:  ");  
+
+		if ((junctions == null) || (junctions.size() < 1)) {
+			log.error("..at createJunctions, no junctions aviable:  ");
 			return null;
 		}
 		URI uri = null;
-	    
+
 		ResponseEntity<String> result = null;
-		
-	    try {
-	    	log.info(".. At createJunctions, baseurl:  " + baseUrl);  
-	    	
-			
+
+		try {
+			log.info(".. At createJunctions, baseurl:  " + baseUrl);
+
 			uri = new URI(baseUrl);
-		
+
 			restTemplate = new RestTemplate();
 			for (Junction junction : junctions) {
 				postIndex++;
 				HttpEntity<Junction> request = new HttpEntity<>(junction, defineHeaders());
-				result = restTemplate.postForEntity(uri, request, String.class); 
+				result = restTemplate.postForEntity(uri, request, String.class);
 				if (postIndex % stepSize == 0) {
-					log.info("Junction: " + postIndex + " send with result: " + result.getStatusCode());  
+					log.info("Junction: " + postIndex + " send with result: " + result.getStatusCode());
 				}
-				
+
 			}
-			
-		
-	    } catch (Exception e) {
-	    	log.error("..at createJunctions, Error occured:  "); 
+
+		} catch (Exception e) {
+			log.error("..at createJunctions, Error occured:  ");
 			e.printStackTrace();
 			return null;
 		}
-		
-		log.info("Junctions posted with response: " + result.getStatusCode());        
-		
+
+		log.info("Junctions posted with response: " + result.getStatusCode());
+
 		return result;
-		
+
 	}
-	
-	private HttpHeaders  defineHeaders() {
-		
+
+	private HttpHeaders defineHeaders() {
+
 		String token = networkApiToken;
-		
+
 		HttpHeaders headers = new HttpHeaders();
-	    headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.setBearerAuth(token);
 		headers.set("Accept", "application/vnd.alva.swc.network+json;v=1");
-	    return headers;
-	    
+		return headers;
+
 	}
-	
+
 }

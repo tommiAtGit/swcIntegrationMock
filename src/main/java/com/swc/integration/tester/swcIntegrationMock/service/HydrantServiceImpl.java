@@ -29,121 +29,110 @@ public class HydrantServiceImpl implements HydrantService {
 	private static RestTemplate restTemplate;
 	@Value("${swc.network.url}")
 	private String networUrl;
-	 
+
 	@Value("${swc.network.token}")
-	private String networkApiToken; 
-	
+	private String networkApiToken;
+
 	@Value("${swc.network.sendflag}")
 	private String sendFlag;
-	
+
 	@Override
 	public Hydrant saveHydrant(String network, List<HydrantDto> hydrantDto) {
-		
+
 		List<Hydrant> sampleHydrants = new ArrayList<Hydrant>();
 		List<Hydrant> hydrants = new ArrayList<Hydrant>();
 		Hydrant hyd = null;
 		int index = 0;
-		
+
 		for (HydrantDto dto : hydrantDto) {
-			hyd = Hydrant.builder()
-					.uuid(dto.getUuid())
-					.name(dto.getName())
-					.description(dto.getDescription())
+			hyd = Hydrant.builder().uuid(dto.getUuid()).name(dto.getName()).description(dto.getDescription())
 					.quality(dto.getQuality())
-					//.source(dto.getSource())
-					.coordinates(dto.getCoordinates())
-					.open_time(dto.getOpen_time())
-					.close_time(dto.getClose_time())
-					.max_flow(dto.getMax_flow())
-					.min_pressure(dto.getMin_pressure())
-					.diameter(dto.getDiameter())
+					// .source(dto.getSource())
+					.coordinates(dto.getCoordinates()).open_time(dto.getOpen_time()).close_time(dto.getClose_time())
+					.max_flow(dto.getMax_flow()).min_pressure(dto.getMin_pressure()).diameter(dto.getDiameter())
 					.build();
-			
-			
+
 			if (index < SAMPLE_SIZE) {
 				sampleHydrants.add(hyd);
 				index++;
 			}
 			hydrants.add(hyd);
 		}
-		
+
 		String objectAsJson;
 		try {
 			objectAsJson = mapper.writeValueAsString(sampleHydrants);
-			log.info("..at saveHydrant, object as Json:  " + objectAsJson); 
-			if(sendFlag.equals("TRUE")) {
-				log.info(" "); 
-				log.info(" + Post hydrants + "); 
-				createHydrants(network,hydrants);
+			log.info("..at saveHydrant, object as Json:  " + objectAsJson);
+			if (sendFlag.equals("TRUE")) {
+				log.info(" ");
+				log.info(" + Post hydrants + ");
+				createHydrants(network, hydrants);
 			}
-			
+
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
 			log.error("Error occured while parsing json: ");
 			e.printStackTrace();
 		}
-		
+
 		return null;
 	}
-	//Send test gateValves
-		private  ResponseEntity<String> createHydrants (String network,List<Hydrant> hydrants) {
-			final String serviceUrl = "/networks/" + network +  "/hydrants";
-			final String baseUrl = networUrl+serviceUrl;
-			
-			int postIndex = 0; 
-			int stepSize = 10;
-			
-			log.info("++ Start of Hydrant post: " + LocalDateTime.now() + "++");    
-			if ((hydrants == null)|| (hydrants.size() < 1))  {
-				log.error("..at createHydrants, no hydrants aviable:  ");  
-				return null;
-			}
-			URI uri = null;
-		    
-			ResponseEntity<String> result = null;
-			
-		    try {
-		    	log.info(".. At ,createHydrants baseurl:  " + baseUrl);  
-		    	
-				
-				uri = new URI(baseUrl);
-			
-				restTemplate = new RestTemplate();
-				for (Hydrant hydrant : hydrants) {
-					postIndex++;
-					HttpEntity<Hydrant> request = new HttpEntity<>(hydrant, defineHeaders());
-					result = restTemplate.postForEntity(uri, request, String.class); 
-					if (postIndex % stepSize == 0) {
-						log.info("Hydrant: " + postIndex + " send with result: " + result.getStatusCode());  
-					}
-					
+
+	// Send test gateValves
+	private ResponseEntity<String> createHydrants(String network, List<Hydrant> hydrants) {
+		final String serviceUrl = "/networks/" + network + "/hydrants";
+		final String baseUrl = networUrl + serviceUrl;
+
+		int postIndex = 0;
+		int stepSize = 10;
+
+		log.info("++ Start of Hydrant post: " + LocalDateTime.now() + "++");
+		if ((hydrants == null) || (hydrants.size() < 1)) {
+			log.error("..at createHydrants, no hydrants aviable:  ");
+			return null;
+		}
+		URI uri = null;
+
+		ResponseEntity<String> result = null;
+
+		try {
+			log.info(".. At ,createHydrants baseurl:  " + baseUrl);
+
+			uri = new URI(baseUrl);
+
+			restTemplate = new RestTemplate();
+			for (Hydrant hydrant : hydrants) {
+				postIndex++;
+				HttpEntity<Hydrant> request = new HttpEntity<>(hydrant, defineHeaders());
+				result = restTemplate.postForEntity(uri, request, String.class);
+				if (postIndex % stepSize == 0) {
+					log.info("Hydrant: " + postIndex + " send with result: " + result.getStatusCode());
 				}
-				
-			
-		    } catch (Exception e) {
-		    	log.error("..at createHydrants, Error occured:  "); 
-				e.printStackTrace();
-				return null;
+
 			}
-			
-			log.info("End of Hydrant post: " + LocalDateTime.now());        
-			
-			return result;
-			
-		}
-		
-		private HttpHeaders  defineHeaders() {
-			
-			String token = networkApiToken;
-			
-			HttpHeaders headers = new HttpHeaders();
-		    headers.setContentType(MediaType.APPLICATION_JSON);
-			headers.setBearerAuth(token);
-			headers.set("Accept", "application/vnd.alva.swc.network+json;v=1");
-		    return headers;
-		    
+
+		} catch (Exception e) {
+			log.error("..at createHydrants, Error occured:  ");
+			e.printStackTrace();
+			return null;
 		}
 
+		log.info("End of Hydrant post: " + LocalDateTime.now());
 
-	
+		return result;
+
+	}
+
+	private HttpHeaders defineHeaders() {
+
+		String token = networkApiToken;
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.setBearerAuth(token);
+		headers.set("Accept", "application/vnd.alva.swc.network+json;v=1");
+		return headers;
+
+	}
+
 }

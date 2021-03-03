@@ -26,22 +26,19 @@ public class AreaController {
 
 	@Autowired
 	AreaService service;
-	
+
 	public ResponseEntity<Area> saveAreas(@Validated @PathVariable("networkID") String networkId,
-			@Validated @RequestBody List<AreaDto> areaDtos){
-	
+			@Validated @RequestBody List<AreaDto> areaDtos) {
+
 		if (networkId == null) {
 			log.error("..at saveAreas, network id were null");
+		} else {
+			log.info("..at saveAreas, network id OK! " + networkId);
 		}
-		else {
-			log.info("..at saveAreas, network id OK! " + networkId );
-		}
-		
+
 		log.info(".. New DEMANDS added. Number of demands created: " + areaDtos.size());
-		
-		
-		return new ResponseEntity<Area>(service.saveNewArea(networkId, areaDtos),HttpStatus.CREATED);
+
+		return new ResponseEntity<Area>(service.saveNewArea(networkId, areaDtos), HttpStatus.CREATED);
 	}
-	
-	
+
 }

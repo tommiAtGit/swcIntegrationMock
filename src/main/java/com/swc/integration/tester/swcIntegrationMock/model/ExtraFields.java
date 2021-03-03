@@ -14,10 +14,10 @@ import lombok.Setter;
 @Setter
 @Builder
 public class ExtraFields {
-	
+
 	private String network;
-	
+
 	private String ext_id;
-	
+
 	private List<Sensor> sensor;
 }

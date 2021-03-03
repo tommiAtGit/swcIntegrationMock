@@ -27,20 +27,19 @@ public class StationController {
 
 	@Autowired
 	StationService service;
-	
+
 	@PostMapping
-	public ResponseEntity<Station>saveStations( @Validated @PathVariable("networkID") String networkId,@Validated @RequestBody List<StationDto> stationDtos){
-		
+	public ResponseEntity<Station> saveStations(@Validated @PathVariable("networkID") String networkId,
+			@Validated @RequestBody List<StationDto> stationDtos) {
+
 		if (networkId == null) {
 			log.error("..at saveStations, network id were NULL");
+		} else {
+			log.info("..at saveStations, network id OK! " + networkId);
 		}
-		else {
-			log.info("..at saveStations, network id OK! " + networkId );
-		}
-		
+
 		log.info("New STATIONS added. Number of stations created:: " + stationDtos.size());
-		return new ResponseEntity<Station>(service.saveStation(stationDtos),HttpStatus.CREATED);
-	
+		return new ResponseEntity<Station>(service.saveStation(stationDtos), HttpStatus.CREATED);
+
 	}
 }
-

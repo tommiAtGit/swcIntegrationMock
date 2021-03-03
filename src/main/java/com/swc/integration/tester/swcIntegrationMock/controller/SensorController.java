@@ -27,21 +27,19 @@ public class SensorController {
 
 	@Autowired
 	SensorService service;
-	
-	
-	
+
 	@PostMapping
-	public ResponseEntity<Sensor>saveSensors( @Validated @PathVariable("networkID") String networkId, @Validated @RequestBody List<SensorDto> sensorDtos){
-		
+	public ResponseEntity<Sensor> saveSensors(@Validated @PathVariable("networkID") String networkId,
+			@Validated @RequestBody List<SensorDto> sensorDtos) {
+
 		if (networkId == null) {
 			log.error("..at saveSensors, network id were null");
+		} else {
+			log.info("..at saveSensors, network id OK! " + networkId);
 		}
-		else {
-			log.info("..at saveSensors, network id OK! " + networkId );
-		}
-		
+
 		log.info(".. New SENSORS added. Number of sensors created: " + sensorDtos.size());
-		return new ResponseEntity<Sensor>(service.saveSensor(networkId,sensorDtos),HttpStatus.CREATED);
-	
+		return new ResponseEntity<Sensor>(service.saveSensor(networkId, sensorDtos), HttpStatus.CREATED);
+
 	}
 }

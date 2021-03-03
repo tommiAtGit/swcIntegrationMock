@@ -15,10 +15,10 @@ public class NetworkDto {
 
 	private String uuid;
 
-    private String name;
-    
-    private String description;
+	private String name;
 
-   // private  NetworkChildren children;
+	private String description;
+
+	// private NetworkChildren children;
 
 }

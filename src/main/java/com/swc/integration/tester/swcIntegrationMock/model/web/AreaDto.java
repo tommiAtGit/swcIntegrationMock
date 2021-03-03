@@ -14,12 +14,12 @@ import lombok.Setter;
 @Setter
 @Builder
 public class AreaDto {
-	
+
 	private String uuid;
-    
-	private  String network;
-	          
-	private List <String> ext_id;
-	          
+
+	private String network;
+
+	private List<String> ext_id;
+
 	private String name;
 }

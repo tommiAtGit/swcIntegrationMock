@@ -2,7 +2,6 @@ package com.swc.integration.tester.swcIntegrationMock.model;
 
 import java.util.List;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,13 +18,13 @@ import lombok.Setter;
 
 public class StationChildren {
 
-	private List<Valve>valves;
-        
-    private List <Reservoir>reservoirs;
-        
-    private List<Pump> pumps;
-        
-    private List<Tank> tanks;
-    
-    private List<Battery> batteries;
+	private List<Valve> valves;
+
+	private List<Reservoir> reservoirs;
+
+	private List<Pump> pumps;
+
+	private List<Tank> tanks;
+
+	private List<Battery> batteries;
 }

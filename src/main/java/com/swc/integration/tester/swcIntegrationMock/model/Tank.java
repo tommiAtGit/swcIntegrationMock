@@ -15,32 +15,32 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class Tank extends Node {
 
-	//private Node node;
-	
+	// private Node node;
+
 	private String station;
-	 
+
 	private double elevation;
-	    
+
 	private double init_level;
-	    
+
 	private double min_level;
-	    
+
 	private double max_level;
-	    
+
 	private double diameter;
-	    
+
 	private double min_volume;
-	    
+
 	private String vol_curve;
-	   
+
 	private Boolean overflow;
-	   
+
 	private MixingModel mixing;
-	    
-	private  String symbol;
-	  
-	private  List<String> tags;
-	    
+
+	private String symbol;
+
+	private List<String> tags;
+
 	private List<String> zones;
-	    
+
 }

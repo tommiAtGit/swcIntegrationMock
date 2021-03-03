@@ -14,8 +14,8 @@ import lombok.Setter;
 public class NodeSource {
 
 	private SourceEnum source_type;
-	 
-	 private double strength;
-    
-    private String strength_pattern;
+
+	private double strength;
+
+	private String strength_pattern;
 }
